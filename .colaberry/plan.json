@@ -1,0 +1,651 @@
+{
+  "schema_version": 2,
+  "project_name": "AI-Powered E-Commerce Order Operations Assistant",
+  "descriptor": "An AI assistant for managing order issues on the Kashmir Craft website, focusing on safety, reliability, and ease of management.",
+  "requirements": [
+    {
+      "id": "REQ-001",
+      "kind": "FUNC",
+      "cluster": "Order Identification",
+      "priority": "must",
+      "statement": "The system must identify duplicate orders from the online data source.",
+      "fulfilled_by": [
+        "STORY-001"
+      ]
+    },
+    {
+      "id": "REQ-002",
+      "kind": "FUNC",
+      "cluster": "Order Identification",
+      "priority": "must",
+      "statement": "The system must detect payment failures from the online data source.",
+      "fulfilled_by": [
+        "STORY-003"
+      ]
+    },
+    {
+      "id": "REQ-003",
+      "kind": "FUNC",
+      "cluster": "Order Identification",
+      "priority": "must",
+      "statement": "The system must identify inventory issues from the online data source.",
+      "fulfilled_by": [
+        "STORY-013"
+      ]
+    },
+    {
+      "id": "REQ-004",
+      "kind": "FUNC",
+      "cluster": "Order Identification",
+      "priority": "must",
+      "statement": "The system must detect shipping delays from the online data source.",
+      "fulfilled_by": [
+        "STORY-014"
+      ]
+    },
+    {
+      "id": "REQ-005",
+      "kind": "FUNC",
+      "cluster": "Evidence Gathering",
+      "priority": "must",
+      "statement": "The system must gather evidence for each identified order issue.",
+      "fulfilled_by": [
+        "STORY-003"
+      ]
+    },
+    {
+      "id": "REQ-006",
+      "kind": "FUNC",
+      "cluster": "Action Recommendation",
+      "priority": "must",
+      "statement": "The system must recommend an action for each order issue.",
+      "fulfilled_by": [
+        "STORY-004"
+      ]
+    },
+    {
+      "id": "REQ-007",
+      "kind": "FUNC",
+      "cluster": "Risk Assessment",
+      "priority": "must",
+      "statement": "The system must check the risk level of each recommended action.",
+      "fulfilled_by": [
+        "STORY-005"
+      ]
+    },
+    {
+      "id": "REQ-008",
+      "kind": "FUNC",
+      "cluster": "Approval Process",
+      "priority": "must",
+      "statement": "The system must require human approval for high-risk actions.",
+      "fulfilled_by": [
+        "STORY-006"
+      ]
+    },
+    {
+      "id": "REQ-009",
+      "kind": "FUNC",
+      "cluster": "Outcome Verification",
+      "priority": "must",
+      "statement": "The system must verify the outcome of each action taken.",
+      "fulfilled_by": [
+        "STORY-007"
+      ]
+    },
+    {
+      "id": "REQ-010",
+      "kind": "FUNC",
+      "cluster": "Processing Control",
+      "priority": "must",
+      "statement": "The system must pause processing when unsure about an order issue.",
+      "fulfilled_by": [
+        "STORY-008"
+      ]
+    },
+    {
+      "id": "REQ-011",
+      "kind": "FUNC",
+      "cluster": "Transparency",
+      "priority": "must",
+      "statement": "The system must provide a summary of actions prepared before execution.",
+      "fulfilled_by": [
+        "STORY-009"
+      ]
+    },
+    {
+      "id": "REQ-012",
+      "kind": "FUNC",
+      "cluster": "Triggering",
+      "priority": "must",
+      "statement": "The system must be triggered by an order submission event.",
+      "fulfilled_by": [
+        "STORY-012"
+      ]
+    },
+    {
+      "id": "REQ-013",
+      "kind": "NFR",
+      "cluster": "User Experience",
+      "priority": "must",
+      "statement": "Every screen the customer support team uses must complete its primary action in three clicks or fewer.",
+      "fulfilled_by": [
+        "STORY-015"
+      ]
+    },
+    {
+      "id": "REQ-014",
+      "kind": "NFR",
+      "cluster": "Performance",
+      "priority": "must",
+      "statement": "The system must resolve order issues within 2 hours.",
+      "fulfilled_by": [
+        "STORY-011"
+      ]
+    },
+    {
+      "id": "REQ-015",
+      "kind": "SAFE",
+      "cluster": "Audit Trail",
+      "priority": "must",
+      "statement": "The system must log all actions and decisions for audit purposes.",
+      "fulfilled_by": [
+        "STORY-001",
+        "STORY-002"
+      ]
+    },
+    {
+      "id": "REQ-016",
+      "kind": "CONSTRAINT",
+      "cluster": "Integration",
+      "priority": "must",
+      "statement": "The system must connect to the online data source for order information.",
+      "fulfilled_by": []
+    }
+  ],
+  "releases": [
+    {
+      "key": "r0",
+      "demo": "Show identification of duplicate orders and logging actions.",
+      "goal": "Establish basic order issue identification and logging.",
+      "name": "Initial Skeleton",
+      "week_end": 1,
+      "week_start": 1,
+      "story_ids": [
+        "STORY-001",
+        "STORY-002",
+        "STORY-012"
+      ],
+      "starts_on": null,
+      "ends_on": null,
+      "is_demo_target": false
+    },
+    {
+      "key": "r1",
+      "demo": "Demonstrate evidence gathering and action recommendation for payment failures.",
+      "goal": "Enable evidence gathering and action recommendation.",
+      "name": "Evidence Gathering and Recommendation",
+      "week_end": 2,
+      "week_start": 2,
+      "story_ids": [
+        "STORY-003",
+        "STORY-004",
+        "STORY-013",
+        "STORY-014"
+      ],
+      "starts_on": null,
+      "ends_on": null,
+      "is_demo_target": false
+    },
+    {
+      "key": "r2",
+      "demo": "Show risk assessment and approval process for high-risk actions.",
+      "goal": "Implement risk assessment and human approval process.",
+      "name": "Risk Assessment and Approval",
+      "week_end": 3,
+      "week_start": 3,
+      "story_ids": [
+        "STORY-005",
+        "STORY-006"
+      ],
+      "starts_on": null,
+      "ends_on": null,
+      "is_demo_target": false
+    },
+    {
+      "key": "r3",
+      "demo": "Verify outcomes and demonstrate pausing on uncertain issues.",
+      "goal": "Add outcome verification and processing control features.",
+      "name": "Outcome Verification and Processing Control",
+      "week_end": 4,
+      "week_start": 4,
+      "story_ids": [
+        "STORY-007",
+        "STORY-008"
+      ],
+      "starts_on": null,
+      "ends_on": null,
+      "is_demo_target": false
+    },
+    {
+      "key": "r4",
+      "demo": "Show user-friendly interface and 2-hour resolution time.",
+      "goal": "Enhance user experience and ensure performance targets.",
+      "name": "User Experience and Performance",
+      "week_end": 6,
+      "week_start": 5,
+      "story_ids": [
+        "STORY-009",
+        "STORY-011",
+        "STORY-015"
+      ],
+      "starts_on": null,
+      "ends_on": null,
+      "is_demo_target": false
+    }
+  ],
+  "stories": [
+    {
+      "id": "STORY-001",
+      "title": "Identify Duplicate Orders",
+      "release": "r0",
+      "fulfills": [
+        "REQ-001",
+        "REQ-015"
+      ],
+      "narrative": "As a customer support agent, I want to identify duplicate orders so that I can prevent processing errors.",
+      "acceptance": [
+        "Given an order submission, when a duplicate order is detected, then log the detection.",
+        "Given an order submission, when no duplicate is found, then log the result.",
+        "Trust: All duplicate detections are logged for audit."
+      ],
+      "blocked_by": [],
+      "owner_agent": "Customer Support Team",
+      "failure_paths": [
+        "Failure to detect duplicates",
+        "Incorrect duplicate detection",
+        "Logging failure"
+      ],
+      "task_guidance": "Implement order scanning logic to detect duplicates from the online data source.",
+      "due_on": null,
+      "due_baseline_on": null
+    },
+    {
+      "id": "STORY-002",
+      "title": "Log Actions for Audit",
+      "release": "r0",
+      "fulfills": [
+        "REQ-015"
+      ],
+      "narrative": "As a system auditor, I want all actions logged so that I can review them for compliance.",
+      "acceptance": [
+        "Given an action is taken, when it is logged, then it appears in the audit trail.",
+        "Given an action is taken, when logging fails, then an alert is generated.",
+        "Trust: All actions are logged with timestamps."
+      ],
+      "blocked_by": [],
+      "owner_agent": "System Auditor",
+      "failure_paths": [
+        "Logging system failure",
+        "Incomplete logs",
+        "Timestamp errors"
+      ],
+      "task_guidance": "Set up logging mechanism to record all actions and decisions.",
+      "due_on": null,
+      "due_baseline_on": null
+    },
+    {
+      "id": "STORY-003",
+      "title": "Gather Evidence for Payment Failures",
+      "release": "r1",
+      "fulfills": [
+        "REQ-002",
+        "REQ-005"
+      ],
+      "narrative": "As a customer support agent, I want to gather evidence for payment failures so that I can understand the issue better.",
+      "acceptance": [
+        "Given a payment failure, when evidence is gathered, then it is stored for review.",
+        "Given a payment failure, when evidence gathering fails, then an alert is generated.",
+        "Trust: All evidence is logged with the issue details."
+      ],
+      "blocked_by": [
+        "STORY-001"
+      ],
+      "owner_agent": "Customer Support Team",
+      "failure_paths": [
+        "Evidence collection failure",
+        "Incorrect evidence",
+        "Storage failure"
+      ],
+      "task_guidance": "Develop evidence collection for payment failures using online data.",
+      "due_on": null,
+      "due_baseline_on": null
+    },
+    {
+      "id": "STORY-004",
+      "title": "Recommend Actions for Payment Failures",
+      "release": "r1",
+      "fulfills": [
+        "REQ-006"
+      ],
+      "narrative": "As a customer support agent, I want the system to recommend actions for payment failures so that I can resolve them efficiently.",
+      "acceptance": [
+        "Given a payment failure, when an action is recommended, then it appears in the action list.",
+        "Given a payment failure, when no recommendation is possible, then a notification is sent.",
+        "Trust: All recommendations are logged with rationale."
+      ],
+      "blocked_by": [
+        "STORY-003"
+      ],
+      "owner_agent": "Customer Support Team",
+      "failure_paths": [
+        "Recommendation engine failure",
+        "Incorrect recommendations",
+        "Notification failure"
+      ],
+      "task_guidance": "Implement recommendation engine for payment failures.",
+      "due_on": null,
+      "due_baseline_on": null
+    },
+    {
+      "id": "STORY-005",
+      "title": "Assess Risk of Recommended Actions",
+      "release": "r2",
+      "fulfills": [
+        "REQ-007"
+      ],
+      "narrative": "As a customer support agent, I want to assess the risk of recommended actions so that I can decide on approvals.",
+      "acceptance": [
+        "Given a recommended action, when risk is assessed, then it is displayed with the action.",
+        "Given a recommended action, when risk assessment fails, then an alert is generated.",
+        "Trust: All risk assessments are logged with action details."
+      ],
+      "blocked_by": [
+        "STORY-004"
+      ],
+      "owner_agent": "Customer Support Team",
+      "failure_paths": [
+        "Risk assessment failure",
+        "Incorrect risk levels",
+        "Logging failure"
+      ],
+      "task_guidance": "Develop risk assessment logic for recommended actions.",
+      "due_on": null,
+      "due_baseline_on": null
+    },
+    {
+      "id": "STORY-006",
+      "title": "Require Approval for High-Risk Actions",
+      "release": "r2",
+      "fulfills": [
+        "REQ-008"
+      ],
+      "narrative": "As a customer support agent, I want high-risk actions to require approval so that I can ensure safety.",
+      "acceptance": [
+        "Given a high-risk action, when approval is required, then a notification is sent to the approver.",
+        "Given a high-risk action, when approval is not obtained, then the action is paused.",
+        "Trust: All approval requests are logged with timestamps."
+      ],
+      "blocked_by": [
+        "STORY-005"
+      ],
+      "owner_agent": "Customer Support Team",
+      "failure_paths": [
+        "Approval workflow failure",
+        "Notification failure",
+        "Logging failure"
+      ],
+      "task_guidance": "Implement approval workflow for high-risk actions.",
+      "due_on": null,
+      "due_baseline_on": null
+    },
+    {
+      "id": "STORY-007",
+      "title": "Verify Outcome of Actions",
+      "release": "r3",
+      "fulfills": [
+        "REQ-009"
+      ],
+      "narrative": "As a customer support agent, I want to verify the outcome of actions so that I can confirm their success.",
+      "acceptance": [
+        "Given an action is taken, when the outcome is verified, then it is logged as successful or failed.",
+        "Given an action is taken, when verification fails, then an alert is generated.",
+        "Trust: All outcomes are logged with verification details."
+      ],
+      "blocked_by": [
+        "STORY-006"
+      ],
+      "owner_agent": "Customer Support Team",
+      "failure_paths": [
+        "Verification process failure",
+        "Incorrect outcome logging",
+        "Alert failure"
+      ],
+      "task_guidance": "Develop outcome verification process for actions.",
+      "due_on": null,
+      "due_baseline_on": null
+    },
+    {
+      "id": "STORY-008",
+      "title": "Pause Processing on Uncertain Issues",
+      "release": "r3",
+      "fulfills": [
+        "REQ-010"
+      ],
+      "narrative": "As a customer support agent, I want processing to pause on uncertain issues so that I can review them manually.",
+      "acceptance": [
+        "Given an uncertain issue, when processing is paused, then a notification is sent to the agent.",
+        "Given an uncertain issue, when pausing fails, then an alert is generated.",
+        "Trust: All pauses are logged with issue details."
+      ],
+      "blocked_by": [
+        "STORY-007"
+      ],
+      "owner_agent": "Customer Support Team",
+      "failure_paths": [
+        "Pause functionality failure",
+        "Notification failure",
+        "Logging failure"
+      ],
+      "task_guidance": "Implement pause functionality for uncertain issues.",
+      "due_on": null,
+      "due_baseline_on": null
+    },
+    {
+      "id": "STORY-009",
+      "title": "Provide Summary of Prepared Actions",
+      "release": "r4",
+      "fulfills": [
+        "REQ-011"
+      ],
+      "narrative": "As a customer support agent, I want to see a summary of prepared actions so that I can review them before execution.",
+      "acceptance": [
+        "Given actions are prepared, when a summary is generated, then it is displayed to the agent.",
+        "Given actions are prepared, when summary generation fails, then an alert is generated.",
+        "Trust: All summaries are logged with action details."
+      ],
+      "blocked_by": [
+        "STORY-008"
+      ],
+      "owner_agent": "Customer Support Team",
+      "failure_paths": [
+        "Summary generation failure",
+        "Incorrect summary",
+        "Alert failure"
+      ],
+      "task_guidance": "Develop summary generation for prepared actions.",
+      "due_on": null,
+      "due_baseline_on": null
+    },
+    {
+      "id": "STORY-011",
+      "title": "Ensure 2-Hour Resolution Time",
+      "release": "r4",
+      "fulfills": [
+        "REQ-014"
+      ],
+      "narrative": "As a customer support agent, I want order issues resolved within 2 hours so that I can meet service level agreements.",
+      "acceptance": [
+        "Given an order issue, when resolved within 2 hours, then it is logged as timely.",
+        "Given an order issue, when resolution exceeds 2 hours, then an alert is generated.",
+        "Trust: All resolution times are logged for performance analysis."
+      ],
+      "blocked_by": [
+        "STORY-009"
+      ],
+      "owner_agent": "Customer Support Team",
+      "failure_paths": [
+        "Resolution time failure",
+        "Performance bottlenecks",
+        "Alert failure"
+      ],
+      "task_guidance": "Optimize system processes to ensure 2-hour resolution time.",
+      "due_on": null,
+      "due_baseline_on": null
+    },
+    {
+      "id": "STORY-012",
+      "title": "Trigger System on Order Submission",
+      "release": "r0",
+      "fulfills": [
+        "REQ-012"
+      ],
+      "narrative": "As a system, I want to be triggered by an order submission event, so that I can start processing immediately.",
+      "acceptance": [
+        "Given an order is submitted, when the system receives the event, then it starts processing the order.",
+        "Given an order is submitted, when the system fails to receive the event, then it logs an error and retries.",
+        "Trust: Every order submission event is logged with a timestamp and status."
+      ],
+      "blocked_by": [],
+      "owner_agent": "Order Processing System",
+      "failure_paths": [
+        "Event not received",
+        "Event received but not logged",
+        "Event triggers incorrect processing"
+      ],
+      "task_guidance": "Implement an event listener for order submissions. Ensure the system logs each event with a timestamp and status in the order_events table.",
+      "due_on": null,
+      "due_baseline_on": null
+    },
+    {
+      "id": "STORY-013",
+      "title": "Identify Inventory Issues",
+      "release": "r1",
+      "fulfills": [
+        "REQ-003"
+      ],
+      "narrative": "As a system, I want to identify inventory issues from the online data source, so that I can alert the inventory management team.",
+      "acceptance": [
+        "Given the online data source, when inventory levels fall below threshold, then the system identifies an issue.",
+        "Given the online data source, when inventory data is missing, then the system logs an error.",
+        "Trust: Every identified inventory issue is logged with details and timestamp."
+      ],
+      "blocked_by": [
+        "STORY-012"
+      ],
+      "owner_agent": "Inventory Management System",
+      "failure_paths": [
+        "Data source unavailable",
+        "Incorrect threshold detection",
+        "Issue not logged"
+      ],
+      "task_guidance": "Connect to the online data source and implement checks for inventory thresholds. Log identified issues in the inventory_issues table.",
+      "due_on": null,
+      "due_baseline_on": null
+    },
+    {
+      "id": "STORY-014",
+      "title": "Detect Shipping Delays",
+      "release": "r1",
+      "fulfills": [
+        "REQ-004"
+      ],
+      "narrative": "As a system, I want to detect shipping delays from the online data source, so that I can notify the logistics team.",
+      "acceptance": [
+        "Given the online data source, when shipping times exceed expected duration, then the system detects a delay.",
+        "Given the online data source, when shipping data is incomplete, then the system logs an error.",
+        "Trust: Every detected shipping delay is logged with details and timestamp."
+      ],
+      "blocked_by": [
+        "STORY-012"
+      ],
+      "owner_agent": "Logistics Management System",
+      "failure_paths": [
+        "Data source unavailable",
+        "Incorrect delay detection",
+        "Delay not logged"
+      ],
+      "task_guidance": "Connect to the online data source and implement checks for expected shipping durations. Log detected delays in the shipping_delays table.",
+      "due_on": null,
+      "due_baseline_on": null
+    },
+    {
+      "id": "STORY-015",
+      "title": "Optimize Customer Support Screens for Efficiency",
+      "release": "r4",
+      "fulfills": [
+        "REQ-013"
+      ],
+      "narrative": "As a customer support agent, I want to complete primary actions on screens in three clicks or fewer, so that I can assist customers efficiently.",
+      "acceptance": [
+        "Given a customer support screen, when I perform the primary action, then it completes in three clicks or fewer.",
+        "Given a customer support screen, when I attempt to perform an action that requires more than three clicks, then I receive a notification to streamline the process.",
+        "Trust: Every action performed is logged with the number of clicks for audit."
+      ],
+      "blocked_by": [
+        "STORY-009"
+      ],
+      "owner_agent": "Customer Support Team",
+      "failure_paths": [
+        "Primary action takes more than three clicks",
+        "Notification for excessive clicks does not appear",
+        "Click count logging fails"
+      ],
+      "task_guidance": "Review all customer support screens and streamline workflows to ensure primary actions are completed in three clicks or fewer. Implement logging for click counts on actions.",
+      "due_on": null,
+      "due_baseline_on": null
+    }
+  ],
+  "agents": [],
+  "project": {
+    "name": "AI-Powered E-Commerce Order Operations Assistant",
+    "descriptor": "An AI assistant for managing order issues on the Kashmir Craft website, focusing on safety, reliability, and ease of management.",
+    "repo_url": null,
+    "plan_version": 1,
+    "plan_sha256": "115bce45216ab2a2a65d2221b7fca6f5428320e48407217abaae8010bd9cd56b"
+  },
+  "schedule": null,
+  "derived": {
+    "measures": [
+      {
+        "id": "REQ-014",
+        "statement": "The system must resolve order issues within 2 hours."
+      }
+    ],
+    "guardrails": [
+      {
+        "id": "REQ-015",
+        "statement": "The system must log all actions and decisions for audit purposes."
+      }
+    ],
+    "systems": [],
+    "roles": [
+      "customer support agent",
+      "system auditor"
+    ],
+    "counts": {
+      "requirements_total": 16,
+      "requirements_by_kind": {
+        "CONSTRAINT": 1,
+        "FUNC": 12,
+        "NFR": 2,
+        "SAFE": 1
+      },
+      "stories_total": 14,
+      "releases_total": 5,
+      "agents_total": 0,
+      "failure_paths_total": 34,
+      "agents_by_autonomy": {}
+    }
+  }
+}

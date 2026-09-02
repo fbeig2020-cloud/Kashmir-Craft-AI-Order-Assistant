@@ -1,0 +1,534 @@
+{
+  "schema_version": 2,
+  "project": "AI-Powered E-Commerce Order Operations Assistant",
+  "totals": {
+    "stories_total": 15,
+    "stories_verified": 0,
+    "stories_submitted": 0,
+    "stories_in_progress": 0,
+    "stories_not_started": 15,
+    "criteria_total": 0,
+    "criteria_passed": 0,
+    "points_awarded": 800
+  },
+  "stories": [
+    {
+      "id": "STORY-000",
+      "release": null,
+      "acceptance_total": 5,
+      "criteria": [
+        {
+          "text": "Given the Command Center, when it is opened, then every tab is reachable and every card drills down one level.",
+          "passed": false
+        },
+        {
+          "text": "Given sample mode, when any tab is shown, then the sample data is visibly labelled as sample.",
+          "passed": false
+        },
+        {
+          "text": "Given the Command Center, when any tab renders, then .colaberry/plan.json and .colaberry/progress.json are both committed in this repo and every tab reads its content from them at runtime rather than from hard-coded values.",
+          "passed": false
+        },
+        {
+          "text": "Given the Command Center, when any tab is shown, then .colaberry/manifest.json is committed in this repo and every tab shows how old that data is and warns when the age exceeds a week.",
+          "passed": false
+        },
+        {
+          "text": "Trust — no tab shows a number, a connection or a result the project has not actually produced.",
+          "passed": false
+        }
+      ],
+      "files_touched": [],
+      "tests_added": [],
+      "notes": null,
+      "updated_at": null,
+      "verification": {
+        "state": "not_started",
+        "criteria_passed": 0,
+        "criteria_total": 0,
+        "verified_at": null,
+        "commit_sha": null,
+        "commit_url": null,
+        "commit_at": null,
+        "points_awarded": 100,
+        "outstanding": []
+      }
+    },
+    {
+      "id": "STORY-001",
+      "release": "r0",
+      "acceptance_total": 3,
+      "criteria": [
+        {
+          "text": "Given an order submission, when a duplicate order is detected, then log the detection.",
+          "passed": false
+        },
+        {
+          "text": "Given an order submission, when no duplicate is found, then log the result.",
+          "passed": false
+        },
+        {
+          "text": "Trust: All duplicate detections are logged for audit.",
+          "passed": false
+        }
+      ],
+      "files_touched": [],
+      "tests_added": [],
+      "notes": null,
+      "updated_at": null,
+      "verification": {
+        "state": "not_started",
+        "criteria_passed": 0,
+        "criteria_total": 0,
+        "verified_at": null,
+        "commit_sha": null,
+        "commit_url": null,
+        "commit_at": null,
+        "points_awarded": 100,
+        "outstanding": []
+      }
+    },
+    {
+      "id": "STORY-002",
+      "release": "r0",
+      "acceptance_total": 3,
+      "criteria": [
+        {
+          "text": "Given an action is taken, when it is logged, then it appears in the audit trail.",
+          "passed": false
+        },
+        {
+          "text": "Given an action is taken, when logging fails, then an alert is generated.",
+          "passed": false
+        },
+        {
+          "text": "Trust: All actions are logged with timestamps.",
+          "passed": false
+        }
+      ],
+      "files_touched": [],
+      "tests_added": [],
+      "notes": null,
+      "updated_at": null,
+      "verification": {
+        "state": "not_started",
+        "criteria_passed": 0,
+        "criteria_total": 0,
+        "verified_at": null,
+        "commit_sha": null,
+        "commit_url": null,
+        "commit_at": null,
+        "points_awarded": 100,
+        "outstanding": []
+      }
+    },
+    {
+      "id": "STORY-003",
+      "release": "r1",
+      "acceptance_total": 3,
+      "criteria": [
+        {
+          "text": "Given a payment failure, when evidence is gathered, then it is stored for review.",
+          "passed": false
+        },
+        {
+          "text": "Given a payment failure, when evidence gathering fails, then an alert is generated.",
+          "passed": false
+        },
+        {
+          "text": "Trust: All evidence is logged with the issue details.",
+          "passed": false
+        }
+      ],
+      "files_touched": [],
+      "tests_added": [],
+      "notes": null,
+      "updated_at": null,
+      "verification": {
+        "state": "not_started",
+        "criteria_passed": 0,
+        "criteria_total": 0,
+        "verified_at": null,
+        "commit_sha": null,
+        "commit_url": null,
+        "commit_at": null,
+        "points_awarded": 100,
+        "outstanding": []
+      }
+    },
+    {
+      "id": "STORY-004",
+      "release": "r1",
+      "acceptance_total": 3,
+      "criteria": [
+        {
+          "text": "Given a payment failure, when an action is recommended, then it appears in the action list.",
+          "passed": false
+        },
+        {
+          "text": "Given a payment failure, when no recommendation is possible, then a notification is sent.",
+          "passed": false
+        },
+        {
+          "text": "Trust: All recommendations are logged with rationale.",
+          "passed": false
+        }
+      ],
+      "files_touched": [],
+      "tests_added": [],
+      "notes": null,
+      "updated_at": null,
+      "verification": {
+        "state": "not_started",
+        "criteria_passed": 0,
+        "criteria_total": 0,
+        "verified_at": null,
+        "commit_sha": null,
+        "commit_url": null,
+        "commit_at": null,
+        "points_awarded": 100,
+        "outstanding": []
+      }
+    },
+    {
+      "id": "STORY-005",
+      "release": "r2",
+      "acceptance_total": 3,
+      "criteria": [
+        {
+          "text": "Given a recommended action, when risk is assessed, then it is displayed with the action.",
+          "passed": false
+        },
+        {
+          "text": "Given a recommended action, when risk assessment fails, then an alert is generated.",
+          "passed": false
+        },
+        {
+          "text": "Trust: All risk assessments are logged with action details.",
+          "passed": false
+        }
+      ],
+      "files_touched": [],
+      "tests_added": [],
+      "notes": null,
+      "updated_at": null,
+      "verification": {
+        "state": "not_started",
+        "criteria_passed": 0,
+        "criteria_total": 0,
+        "verified_at": null,
+        "commit_sha": null,
+        "commit_url": null,
+        "commit_at": null,
+        "points_awarded": 100,
+        "outstanding": []
+      }
+    },
+    {
+      "id": "STORY-006",
+      "release": "r2",
+      "acceptance_total": 3,
+      "criteria": [
+        {
+          "text": "Given a high-risk action, when approval is required, then a notification is sent to the approver.",
+          "passed": false
+        },
+        {
+          "text": "Given a high-risk action, when approval is not obtained, then the action is paused.",
+          "passed": false
+        },
+        {
+          "text": "Trust: All approval requests are logged with timestamps.",
+          "passed": false
+        }
+      ],
+      "files_touched": [],
+      "tests_added": [],
+      "notes": null,
+      "updated_at": null,
+      "verification": {
+        "state": "not_started",
+        "criteria_passed": 0,
+        "criteria_total": 0,
+        "verified_at": null,
+        "commit_sha": null,
+        "commit_url": null,
+        "commit_at": null,
+        "points_awarded": 100,
+        "outstanding": []
+      }
+    },
+    {
+      "id": "STORY-007",
+      "release": "r3",
+      "acceptance_total": 3,
+      "criteria": [
+        {
+          "text": "Given an action is taken, when the outcome is verified, then it is logged as successful or failed.",
+          "passed": false
+        },
+        {
+          "text": "Given an action is taken, when verification fails, then an alert is generated.",
+          "passed": false
+        },
+        {
+          "text": "Trust: All outcomes are logged with verification details.",
+          "passed": false
+        }
+      ],
+      "files_touched": [],
+      "tests_added": [],
+      "notes": null,
+      "updated_at": null,
+      "verification": {
+        "state": "not_started",
+        "criteria_passed": 0,
+        "criteria_total": 0,
+        "verified_at": null,
+        "commit_sha": null,
+        "commit_url": null,
+        "commit_at": null,
+        "points_awarded": 100,
+        "outstanding": []
+      }
+    },
+    {
+      "id": "STORY-008",
+      "release": "r3",
+      "acceptance_total": 3,
+      "criteria": [
+        {
+          "text": "Given an uncertain issue, when processing is paused, then a notification is sent to the agent.",
+          "passed": false
+        },
+        {
+          "text": "Given an uncertain issue, when pausing fails, then an alert is generated.",
+          "passed": false
+        },
+        {
+          "text": "Trust: All pauses are logged with issue details.",
+          "passed": false
+        }
+      ],
+      "files_touched": [],
+      "tests_added": [],
+      "notes": null,
+      "updated_at": null,
+      "verification": {
+        "state": "not_started",
+        "criteria_passed": 0,
+        "criteria_total": 0,
+        "verified_at": null,
+        "commit_sha": null,
+        "commit_url": null,
+        "commit_at": null,
+        "points_awarded": null,
+        "outstanding": []
+      }
+    },
+    {
+      "id": "STORY-009",
+      "release": "r4",
+      "acceptance_total": 3,
+      "criteria": [
+        {
+          "text": "Given actions are prepared, when a summary is generated, then it is displayed to the agent.",
+          "passed": false
+        },
+        {
+          "text": "Given actions are prepared, when summary generation fails, then an alert is generated.",
+          "passed": false
+        },
+        {
+          "text": "Trust: All summaries are logged with action details.",
+          "passed": false
+        }
+      ],
+      "files_touched": [],
+      "tests_added": [],
+      "notes": null,
+      "updated_at": null,
+      "verification": {
+        "state": "not_started",
+        "criteria_passed": 0,
+        "criteria_total": 0,
+        "verified_at": null,
+        "commit_sha": null,
+        "commit_url": null,
+        "commit_at": null,
+        "points_awarded": null,
+        "outstanding": []
+      }
+    },
+    {
+      "id": "STORY-011",
+      "release": "r4",
+      "acceptance_total": 3,
+      "criteria": [
+        {
+          "text": "Given an order issue, when resolved within 2 hours, then it is logged as timely.",
+          "passed": false
+        },
+        {
+          "text": "Given an order issue, when resolution exceeds 2 hours, then an alert is generated.",
+          "passed": false
+        },
+        {
+          "text": "Trust: All resolution times are logged for performance analysis.",
+          "passed": false
+        }
+      ],
+      "files_touched": [],
+      "tests_added": [],
+      "notes": null,
+      "updated_at": null,
+      "verification": {
+        "state": "not_started",
+        "criteria_passed": 0,
+        "criteria_total": 0,
+        "verified_at": null,
+        "commit_sha": null,
+        "commit_url": null,
+        "commit_at": null,
+        "points_awarded": null,
+        "outstanding": []
+      }
+    },
+    {
+      "id": "STORY-012",
+      "release": "r0",
+      "acceptance_total": 3,
+      "criteria": [
+        {
+          "text": "Given an order is submitted, when the system receives the event, then it starts processing the order.",
+          "passed": false
+        },
+        {
+          "text": "Given an order is submitted, when the system fails to receive the event, then it logs an error and retries.",
+          "passed": false
+        },
+        {
+          "text": "Trust: Every order submission event is logged with a timestamp and status.",
+          "passed": false
+        }
+      ],
+      "files_touched": [],
+      "tests_added": [],
+      "notes": null,
+      "updated_at": null,
+      "verification": {
+        "state": "not_started",
+        "criteria_passed": 0,
+        "criteria_total": 0,
+        "verified_at": null,
+        "commit_sha": null,
+        "commit_url": null,
+        "commit_at": null,
+        "points_awarded": null,
+        "outstanding": []
+      }
+    },
+    {
+      "id": "STORY-013",
+      "release": "r1",
+      "acceptance_total": 3,
+      "criteria": [
+        {
+          "text": "Given the online data source, when inventory levels fall below threshold, then the system identifies an issue.",
+          "passed": false
+        },
+        {
+          "text": "Given the online data source, when inventory data is missing, then the system logs an error.",
+          "passed": false
+        },
+        {
+          "text": "Trust: Every identified inventory issue is logged with details and timestamp.",
+          "passed": false
+        }
+      ],
+      "files_touched": [],
+      "tests_added": [],
+      "notes": null,
+      "updated_at": null,
+      "verification": {
+        "state": "not_started",
+        "criteria_passed": 0,
+        "criteria_total": 0,
+        "verified_at": null,
+        "commit_sha": null,
+        "commit_url": null,
+        "commit_at": null,
+        "points_awarded": null,
+        "outstanding": []
+      }
+    },
+    {
+      "id": "STORY-014",
+      "release": "r1",
+      "acceptance_total": 3,
+      "criteria": [
+        {
+          "text": "Given the online data source, when shipping times exceed expected duration, then the system detects a delay.",
+          "passed": false
+        },
+        {
+          "text": "Given the online data source, when shipping data is incomplete, then the system logs an error.",
+          "passed": false
+        },
+        {
+          "text": "Trust: Every detected shipping delay is logged with details and timestamp.",
+          "passed": false
+        }
+      ],
+      "files_touched": [],
+      "tests_added": [],
+      "notes": null,
+      "updated_at": null,
+      "verification": {
+        "state": "not_started",
+        "criteria_passed": 0,
+        "criteria_total": 0,
+        "verified_at": null,
+        "commit_sha": null,
+        "commit_url": null,
+        "commit_at": null,
+        "points_awarded": null,
+        "outstanding": []
+      }
+    },
+    {
+      "id": "STORY-015",
+      "release": "r4",
+      "acceptance_total": 3,
+      "criteria": [
+        {
+          "text": "Given a customer support screen, when I perform the primary action, then it completes in three clicks or fewer.",
+          "passed": false
+        },
+        {
+          "text": "Given a customer support screen, when I attempt to perform an action that requires more than three clicks, then I receive a notification to streamline the process.",
+          "passed": false
+        },
+        {
+          "text": "Trust: Every action performed is logged with the number of clicks for audit.",
+          "passed": false
+        }
+      ],
+      "files_touched": [],
+      "tests_added": [],
+      "notes": null,
+      "updated_at": null,
+      "verification": {
+        "state": "not_started",
+        "criteria_passed": 0,
+        "criteria_total": 0,
+        "verified_at": null,
+        "commit_sha": null,
+        "commit_url": null,
+        "commit_at": null,
+        "points_awarded": null,
+        "outstanding": []
+      }
+    }
+  ]
+}
