@@ -123,7 +123,7 @@
       "tests_added": [
         "test/logger.test.js"
       ],
-      "notes": "logEvent() already appended timestamped JSON entries to logs/audit.log and threw rather than swallowing write failures (built alongside STORY-001). Added raiseAlert(): on a write failure, logEvent now also appends an audit_log_write_failed entry (timestamp, original event, failure reason) to logs/alerts.log before re-throwing, so a logging failure leaves a durable, checkable alert instead of relying solely on the caller propagating the exception. 12/12 tests pass via `npm test`.",
+      "notes": "logEvent() already appended timestamped JSON entries to logs/audit.log and threw rather than swallowing write failures (built alongside STORY-001). Added raiseAlert(): on a write failure, logEvent now also appends an audit_log_write_failed entry (timestamp, original event, failure reason) to logs/alerts.log before re-throwing, so a logging failure leaves a durable, checkable alert instead of relying solely on the caller propagating the exception. Also covered the case where the alert write itself fails alongside the audit write: logEvent folds both failure reasons into the single thrown error rather than swallowing either. 13/13 tests pass via `npm test`.",
       "updated_at": "2026-09-05T00:00:00Z",
       "verification": {
         "state": "not_started",

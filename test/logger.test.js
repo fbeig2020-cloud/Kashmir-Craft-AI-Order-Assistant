@@ -72,3 +72,18 @@ test('logEvent raises an alert when the audit log write fails', () => {
   assert.ok(alert.timestamp, 'alert should carry a timestamp');
   assert.ok(alert.reason, 'alert should carry the failure reason');
 });
+
+test('logEvent folds both failures into the error when the alert write also fails', () => {
+  // Block a single parent path with a file, then point both the audit log
+  // and the alert log under it, so mkdir/append fails for both writes.
+  const blockerDir = fs.mkdtempSync(path.join(os.tmpdir(), 'audit-blocked-'));
+  const blockerFile = path.join(blockerDir, 'not-a-directory');
+  fs.writeFileSync(blockerFile, 'occupied');
+  const logPath = path.join(blockerFile, 'audit.log');
+  const alertPath = path.join(blockerFile, 'alerts.log');
+
+  assert.throws(
+    () => logEvent({ type: 'duplicate_detected' }, logPath, alertPath),
+    /Audit log write failed.*alert also failed/s,
+  );
+});
