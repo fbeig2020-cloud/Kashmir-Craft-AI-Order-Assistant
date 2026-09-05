@@ -1,0 +1,9 @@
+{
+  "name": "kashmir-craft-order-assistant",
+  "version": "0.1.0",
+  "private": true,
+  "description": "AI-powered order operations assistant for the Kashmir Craft website.",
+  "scripts": {
+    "test": "node --test"
+  }
+}
