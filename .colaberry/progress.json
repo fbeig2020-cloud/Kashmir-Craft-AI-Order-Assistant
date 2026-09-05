@@ -105,21 +105,26 @@
       "criteria": [
         {
           "text": "Given an action is taken, when it is logged, then it appears in the audit trail.",
-          "passed": false
+          "passed": true
         },
         {
           "text": "Given an action is taken, when logging fails, then an alert is generated.",
-          "passed": false
+          "passed": true
         },
         {
           "text": "Trust: All actions are logged with timestamps.",
-          "passed": false
+          "passed": true
         }
       ],
-      "files_touched": [],
-      "tests_added": [],
-      "notes": null,
-      "updated_at": null,
+      "files_touched": [
+        "src/logger.js",
+        "test/logger.test.js"
+      ],
+      "tests_added": [
+        "test/logger.test.js"
+      ],
+      "notes": "logEvent() already appended timestamped JSON entries to logs/audit.log and threw rather than swallowing write failures (built alongside STORY-001). Added raiseAlert(): on a write failure, logEvent now also appends an audit_log_write_failed entry (timestamp, original event, failure reason) to logs/alerts.log before re-throwing, so a logging failure leaves a durable, checkable alert instead of relying solely on the caller propagating the exception. 12/12 tests pass via `npm test`.",
+      "updated_at": "2026-09-05T00:00:00Z",
       "verification": {
         "state": "not_started",
         "criteria_passed": 0,

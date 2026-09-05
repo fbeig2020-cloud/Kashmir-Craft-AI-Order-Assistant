@@ -52,3 +52,23 @@ test('logEvent throws rather than swallowing a write failure', () => {
 
   assert.throws(() => logEvent({ type: 'duplicate_detected' }, logPath), /Audit log write failed/);
 });
+
+test('logEvent raises an alert when the audit log write fails', () => {
+  const blockerDir = fs.mkdtempSync(path.join(os.tmpdir(), 'audit-blocked-'));
+  const blockerFile = path.join(blockerDir, 'not-a-directory');
+  fs.writeFileSync(blockerFile, 'occupied');
+  const logPath = path.join(blockerFile, 'audit.log');
+  const alertPath = path.join(blockerDir, 'alerts.log');
+
+  assert.throws(
+    () => logEvent({ type: 'duplicate_detected', orderId: 'ORD-1' }, logPath, alertPath),
+    /Audit log write failed/,
+  );
+
+  const alertLine = fs.readFileSync(alertPath, 'utf8').trim();
+  const alert = JSON.parse(alertLine);
+  assert.equal(alert.type, 'audit_log_write_failed');
+  assert.equal(alert.originalEvent.orderId, 'ORD-1');
+  assert.ok(alert.timestamp, 'alert should carry a timestamp');
+  assert.ok(alert.reason, 'alert should carry the failure reason');
+});

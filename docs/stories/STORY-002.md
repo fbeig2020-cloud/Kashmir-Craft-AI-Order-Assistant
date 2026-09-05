@@ -27,8 +27,8 @@ the same criteria out of `.colaberry/progress.json`, which Claude Code keeps in
 step (see the managed block in CLAUDE.md). Ticking something you have not
 actually met only misleads you.
 
-- [ ] Given an action is taken, when it is logged, then it appears in the audit trail.
-- [ ] Given an action is taken, when logging fails, then an alert is generated.
-- [ ] Trust: All actions are logged with timestamps.
+- [x] Given an action is taken, when it is logged, then it appears in the audit trail.
+- [x] Given an action is taken, when logging fails, then an alert is generated.
+- [x] Trust: All actions are logged with timestamps.
 
 When every box above is ticked, stop and show the demo.
