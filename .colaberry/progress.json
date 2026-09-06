@@ -144,21 +144,32 @@
       "criteria": [
         {
           "text": "Given a payment failure, when evidence is gathered, then it is stored for review.",
-          "passed": false
+          "passed": true
         },
         {
           "text": "Given a payment failure, when evidence gathering fails, then an alert is generated.",
-          "passed": false
+          "passed": true
         },
         {
           "text": "Trust: All evidence is logged with the issue details.",
-          "passed": false
+          "passed": true
         }
       ],
-      "files_touched": [],
-      "tests_added": [],
-      "notes": null,
-      "updated_at": null,
+      "files_touched": [
+        "src/detectPaymentFailure.js",
+        "src/evidenceTable.js",
+        "src/gatherEvidence.js",
+        "test/detectPaymentFailure.test.js",
+        "test/evidenceTable.test.js",
+        "test/gatherEvidence.test.js"
+      ],
+      "tests_added": [
+        "test/detectPaymentFailure.test.js",
+        "test/evidenceTable.test.js",
+        "test/gatherEvidence.test.js"
+      ],
+      "notes": "Walking skeleton, built in three layers reusing STORY-001/002's patterns. detectPaymentFailure() mirrors detectDuplicate(): validates an order/payment record from the online data source, flags paymentStatus === 'failed', and logs the outcome either way (REQ-002). evidenceTable.js mirrors orderEventsTable.js: in-memory insert/getAll/reset, rejecting incomplete or malformed evidence (missing orderId/issueType, or a missing/empty evidence object) at insert time. gatherEvidence() orchestrates REQ-005: validates the payment failure carries enough data (orderId, customerId, failureReason) before building evidence -- an incomplete input is rejected as a collection failure without ever reaching storage; a well-formed record is assembled and stored via evidenceTable.insert (injectable via options.evidenceTable so a storage failure can be tested without touching the real table). Every outcome -- success, collection failure, or storage failure -- is logged to the audit trail with full issue details via the existing logEvent(), and both failure types additionally write a second logEvent() entry to the alerts log so the failure is discoverable even if the caller doesn't handle the thrown error; nothing is swallowed, both failure paths re-throw. 38/38 tests pass via `npm test`. logger.js, detectDuplicates.js, and orderEventsTable.js were not modified.",
+      "updated_at": "2026-09-05T00:00:00Z",
       "verification": {
         "state": "not_started",
         "criteria_passed": 0,
