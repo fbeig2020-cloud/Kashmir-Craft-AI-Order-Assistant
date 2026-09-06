@@ -416,21 +416,29 @@
       "criteria": [
         {
           "text": "Given an order is submitted, when the system receives the event, then it starts processing the order.",
-          "passed": false
+          "passed": true
         },
         {
           "text": "Given an order is submitted, when the system fails to receive the event, then it logs an error and retries.",
-          "passed": false
+          "passed": true
         },
         {
           "text": "Trust: Every order submission event is logged with a timestamp and status.",
-          "passed": false
+          "passed": true
         }
       ],
-      "files_touched": [],
-      "tests_added": [],
-      "notes": null,
-      "updated_at": null,
+      "files_touched": [
+        "src/orderEventListener.js",
+        "src/orderEventsTable.js",
+        "test/orderEventListener.test.js",
+        "test/orderEventsTable.test.js"
+      ],
+      "tests_added": [
+        "test/orderEventListener.test.js",
+        "test/orderEventsTable.test.js"
+      ],
+      "notes": "Walking skeleton: handleOrderSubmission() stands in for the order-submission trigger (no real queue/webhook yet) — a valid event is written to the in-memory order_events table (orderEventsTable.js) and the audit log with status 'received' then 'processing_started', calling an injected process() stub. A malformed event (e.g. missing orderId) is logged with status 'error' and retried up to maxRetries (default 3) before throwing rather than swallowing. A process() callback that throws is logged as 'processing_error' and re-thrown immediately, not retried. logger.js and detectDuplicates.js were not modified. 23/23 tests pass via `npm test`.",
+      "updated_at": "2026-09-06T00:09:00Z",
       "verification": {
         "state": "not_started",
         "criteria_passed": 0,
