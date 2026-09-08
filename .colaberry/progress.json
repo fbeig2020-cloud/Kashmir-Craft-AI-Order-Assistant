@@ -189,21 +189,30 @@
       "criteria": [
         {
           "text": "Given a payment failure, when an action is recommended, then it appears in the action list.",
-          "passed": false
+          "passed": true
         },
         {
           "text": "Given a payment failure, when no recommendation is possible, then a notification is sent.",
-          "passed": false
+          "passed": true
         },
         {
           "text": "Trust: All recommendations are logged with rationale.",
-          "passed": false
+          "passed": true
         }
       ],
-      "files_touched": [],
-      "tests_added": [],
-      "notes": null,
-      "updated_at": null,
+      "files_touched": [
+        "src/actionList.js",
+        "src/recommendAction.js",
+        "src/notifier.js",
+        "test/actionList.test.js",
+        "test/recommendAction.test.js"
+      ],
+      "tests_added": [
+        "test/actionList.test.js",
+        "test/recommendAction.test.js"
+      ],
+      "notes": "Walking skeleton, reusing STORY-002/003's patterns. actionList.js mirrors evidenceTable.js: in-memory insert/getAll/reset, rejecting a row missing orderId/issueType/recommendedAction/rationale/a valid timestamp. recommendAction() maps evidence.failureReason through a small ACTION_MAP (card_declined, insufficient_funds, expired_card) to a recommended action + rationale, stores it via actionList.insert (injectable via options.actionList), and logs action_recommended with the rationale (REQ-006, trust criterion). Incorrect/malformed input is rejected before any lookup, logged as recommendation_failed, alerted, and re-thrown -- not swallowed. When failureReason has no mapping, that is treated as 'no recommendation possible': it logs recommendation_not_possible, sends a notification via notifier.js's sendNotification() (a durable append-only log write mirroring alerts.log, injectable via options.notify), then logs notification_sent and returns null. A storage failure or a notification failure is likewise logged, alerted, and re-thrown rather than swallowed. 52/52 tests pass via `npm test`. logger.js, evidenceTable.js, gatherEvidence.js, and detectPaymentFailure.js were not modified.",
+      "updated_at": "2026-09-08T00:00:00Z",
       "verification": {
         "state": "not_started",
         "criteria_passed": 0,
