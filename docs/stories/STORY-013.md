@@ -27,8 +27,8 @@ the same criteria out of `.colaberry/progress.json`, which Claude Code keeps in
 step (see the managed block in CLAUDE.md). Ticking something you have not
 actually met only misleads you.
 
-- [ ] Given the online data source, when inventory levels fall below threshold, then the system identifies an issue.
-- [ ] Given the online data source, when inventory data is missing, then the system logs an error.
-- [ ] Trust: Every identified inventory issue is logged with details and timestamp.
+- [x] Given the online data source, when inventory levels fall below threshold, then the system identifies an issue.
+- [x] Given the online data source, when inventory data is missing, then the system logs an error.
+- [x] Trust: Every identified inventory issue is logged with details and timestamp.
 
 When every box above is ticked, stop and show the demo.

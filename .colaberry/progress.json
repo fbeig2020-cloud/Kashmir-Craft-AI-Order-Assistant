@@ -478,25 +478,34 @@
       "criteria": [
         {
           "text": "Given the online data source, when inventory levels fall below threshold, then the system identifies an issue.",
-          "passed": false
+          "passed": true
         },
         {
           "text": "Given the online data source, when inventory data is missing, then the system logs an error.",
-          "passed": false
+          "passed": true
         },
         {
           "text": "Trust: Every identified inventory issue is logged with details and timestamp.",
-          "passed": false
+          "passed": true
         }
       ],
-      "files_touched": [],
-      "tests_added": [],
-      "notes": null,
-      "updated_at": null,
+      "files_touched": [
+        "src/inventoryIssuesTable.js",
+        "src/inventoryData.js",
+        "src/detectInventoryIssue.js",
+        "test/inventoryIssuesTable.test.js",
+        "test/detectInventoryIssue.test.js"
+      ],
+      "tests_added": [
+        "test/inventoryIssuesTable.test.js",
+        "test/detectInventoryIssue.test.js"
+      ],
+      "notes": "Walking skeleton, reusing STORY-003/004's evidence-table pattern plus STORY-012's retry pattern. inventoryData.js stands in for the online data source: fetchInventoryData() returns a fixed catalog of Kashmir Craft products (productId, name, quantity, threshold, warehouse), with options.fail/options.data hooks so tests can force an unavailable or empty source. inventoryIssuesTable.js mirrors evidenceTable.js: in-memory insert/getAll/reset, rejecting a row missing productId/issueType/a non-empty details object/a valid timestamp. detectInventoryIssues() calls the data source through fetchWithRetries (capped attempts, explicit per-attempt timeout via Promise.race) -- exhausting retries or an empty response is logged as inventory_data_source_unavailable / inventory_data_missing, alerted, and thrown (REQ-003's 'data source unavailable' path). Each returned record is checked independently: a malformed record is logged as inventory_data_missing and alerted but does not abort the sweep, so the rest of the catalog is still checked; a record with quantity < threshold is stored in inventory_issues via table.insert (details + timestamp) and logged as inventory_issue_detected (REQ-003, trust criterion); a clean record logs no_inventory_issue_found. A storage failure is logged as inventory_issue_not_logged, alerted, and re-thrown rather than swallowed. dataSource and inventoryIssuesTable are both injectable via options, matching gatherEvidence.js's testing pattern. 67/67 tests pass via `npm test` (13 new). logger.js, evidenceTable.js, and detectPaymentFailure.js were not modified.",
+      "updated_at": "2026-09-10T00:00:00Z",
       "verification": {
-        "state": "not_started",
-        "criteria_passed": 0,
-        "criteria_total": 0,
+        "state": "submitted",
+        "criteria_passed": 3,
+        "criteria_total": 3,
         "verified_at": null,
         "commit_sha": null,
         "commit_url": null,
