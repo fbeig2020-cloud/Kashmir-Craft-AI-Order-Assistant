@@ -521,25 +521,32 @@
       "criteria": [
         {
           "text": "Given the online data source, when shipping times exceed expected duration, then the system detects a delay.",
-          "passed": false
+          "passed": true
         },
         {
           "text": "Given the online data source, when shipping data is incomplete, then the system logs an error.",
-          "passed": false
+          "passed": true
         },
         {
           "text": "Trust: Every detected shipping delay is logged with details and timestamp.",
-          "passed": false
+          "passed": true
         }
       ],
-      "files_touched": [],
-      "tests_added": [],
-      "notes": null,
-      "updated_at": null,
+      "files_touched": [
+        "src/shippingData.js",
+        "src/shippingDelaysTable.js",
+        "src/detectShippingDelay.js",
+        "test/detectShippingDelay.test.js"
+      ],
+      "tests_added": [
+        "test/detectShippingDelay.test.js"
+      ],
+      "notes": "Walking skeleton, reusing STORY-013's inventory-issue pattern plus STORY-012's retry pattern. shippingData.js stands in for the online data source: fetchShippingData() returns a fixed set of Kashmir Craft shipments (orderId, carrier, shippedAt, expectedDurationDays, actualDurationDays, destination), with options.fail/options.data hooks so tests can force an unavailable or empty source. shippingDelaysTable.js mirrors inventoryIssuesTable.js: in-memory insert/getAll/reset, rejecting a row missing orderId/issueType/a non-empty details object/a valid timestamp. detectShippingDelays() calls the data source through fetchWithRetries (capped attempts, explicit per-attempt timeout via Promise.race) -- exhausting retries or an empty response is logged as shipping_data_source_unavailable / shipping_data_incomplete, alerted, and thrown (REQ-004's 'data source unavailable' path). Each returned record is checked independently: a malformed record is logged as shipping_data_incomplete and alerted but does not abort the sweep, so the rest of the batch is still checked; a record with actualDurationDays > expectedDurationDays is stored in shipping_delays via table.insert (details + timestamp) and logged as shipping_delay_detected (REQ-004, trust criterion); a clean record logs no_shipping_delay_found. A storage failure is logged as shipping_delay_not_logged, alerted, and re-thrown rather than swallowed. dataSource and shippingDelaysTable are both injectable via options, matching detectInventoryIssue.js's testing pattern. 73/73 tests pass via `npm test` (6 new). logger.js, evidenceTable.js, inventoryIssuesTable.js, and detectInventoryIssue.js were not modified.",
+      "updated_at": "2026-09-10T00:00:00Z",
       "verification": {
-        "state": "not_started",
-        "criteria_passed": 0,
-        "criteria_total": 0,
+        "state": "submitted",
+        "criteria_passed": 3,
+        "criteria_total": 3,
         "verified_at": null,
         "commit_sha": null,
         "commit_url": null,
