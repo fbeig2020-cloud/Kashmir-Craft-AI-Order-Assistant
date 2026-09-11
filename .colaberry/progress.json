@@ -273,21 +273,27 @@
       "criteria": [
         {
           "text": "Given a high-risk action, when approval is required, then a notification is sent to the approver.",
-          "passed": false
+          "passed": true
         },
         {
           "text": "Given a high-risk action, when approval is not obtained, then the action is paused.",
-          "passed": false
+          "passed": true
         },
         {
           "text": "Trust: All approval requests are logged with timestamps.",
-          "passed": false
+          "passed": true
         }
       ],
-      "files_touched": [],
-      "tests_added": [],
-      "notes": null,
-      "updated_at": null,
+      "files_touched": [
+        "src/approvalTable.js",
+        "src/requireApproval.js",
+        "test/requireApproval.test.js"
+      ],
+      "tests_added": [
+        "test/requireApproval.test.js"
+      ],
+      "notes": "Walking skeleton, reusing STORY-004/005's patterns and logger.js/notifier.js unchanged. approvalTable.js mirrors riskAssessmentTable.js: in-memory insert/getAll/reset, rejecting a row missing orderId/issueType/recommendedAction/rationale/riskLevel/riskRationale/status/a valid timestamp. requireApproval() takes a risk-assessed record (from assessRisk.js, REQ-007): a non-'high' riskLevel bypasses approval entirely (logged as approval_not_required, returns status 'auto_approved'), since REQ-008 only scopes high-risk actions. A 'high' riskLevel record is inserted into approvalTable with status 'paused_pending_approval' -- that status IS the paused state (acceptance criterion 2); this story deliberately does not add a way to grant approval, so a high-risk action stays paused until a future story records a decision. After storing, a notification is sent to the approver via notifier.js's sendNotification() (injectable via options.notify), then approval_required is logged with the action/risk details and a timestamp (REQ-008, trust criterion). Malformed input is rejected before any lookup, logged as approval_workflow_failed, alerted, and re-thrown -- not swallowed. A storage failure is likewise logged as approval_workflow_failed, alerted, and re-thrown. A notification failure is logged as notification_failed, alerted, and re-thrown; a dedicated test confirms the approval request already stored beforehand still shows status 'paused_pending_approval' afterward, so a failed notification never un-pauses the action. 82/82 tests pass via `npm test` (5 new). assessRisk.js, riskLevel.js, riskAssessmentTable.js, recommendAction.js, actionList.js, logger.js, and notifier.js were not modified.",
+      "updated_at": "2026-09-11T00:00:00Z",
       "verification": {
         "state": "not_started",
         "criteria_passed": 0,
