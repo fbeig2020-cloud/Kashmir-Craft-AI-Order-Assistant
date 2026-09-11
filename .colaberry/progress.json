@@ -232,21 +232,28 @@
       "criteria": [
         {
           "text": "Given a recommended action, when risk is assessed, then it is displayed with the action.",
-          "passed": false
+          "passed": true
         },
         {
           "text": "Given a recommended action, when risk assessment fails, then an alert is generated.",
-          "passed": false
+          "passed": true
         },
         {
           "text": "Trust: All risk assessments are logged with action details.",
-          "passed": false
+          "passed": true
         }
       ],
-      "files_touched": [],
-      "tests_added": [],
-      "notes": null,
-      "updated_at": null,
+      "files_touched": [
+        "src/riskLevel.js",
+        "src/riskAssessmentTable.js",
+        "src/assessRisk.js",
+        "test/assessRisk.test.js"
+      ],
+      "tests_added": [
+        "test/assessRisk.test.js"
+      ],
+      "notes": "Walking skeleton, reusing STORY-004's patterns and logger.js/notifier.js unchanged. riskLevel.js maps a recommendedAction (from recommendAction.js's ACTION_MAP) to a riskLevel + riskRationale via a small RISK_MAP; all three known actions (retry_payment_with_updated_method, notify_customer_to_add_funds, request_updated_card) are 'low' since none move money or change order state automatically. An unrecognized recommendedAction is never guessed as low: getRiskLevel() falls back to 'high' with an explicit rationale (the 'incorrect risk levels' failure path). riskAssessmentTable.js mirrors actionList.js: in-memory insert/getAll/reset, rejecting a row missing orderId/issueType/recommendedAction/rationale/a valid riskLevel/riskRationale/timestamp -- each stored row carries the action's own fields alongside its risk, so the risk is 'displayed with the action' in one place. assessRisk() validates the incoming action record, looks up its risk, stores the combined row (injectable via options.riskAssessmentTable), and logs risk_assessed with both the action details and the risk fields (REQ-007, trust criterion). Malformed input is rejected before any lookup, logged as risk_assessment_failed, alerted, and re-thrown -- not swallowed. A storage failure is likewise logged as risk_assessment_storage_failed, alerted, and re-thrown. 77/77 tests pass via `npm test`. recommendAction.js, actionList.js, logger.js, and notifier.js were not modified; STORY-006's approval workflow was deliberately left unbuilt.",
+      "updated_at": "2026-09-11T00:00:00Z",
       "verification": {
         "state": "not_started",
         "criteria_passed": 0,
