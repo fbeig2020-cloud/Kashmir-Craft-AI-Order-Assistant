@@ -313,21 +313,27 @@
       "criteria": [
         {
           "text": "Given an action is taken, when the outcome is verified, then it is logged as successful or failed.",
-          "passed": false
+          "passed": true
         },
         {
           "text": "Given an action is taken, when verification fails, then an alert is generated.",
-          "passed": false
+          "passed": true
         },
         {
           "text": "Trust: All outcomes are logged with verification details.",
-          "passed": false
+          "passed": true
         }
       ],
-      "files_touched": [],
-      "tests_added": [],
-      "notes": null,
-      "updated_at": null,
+      "files_touched": [
+        "src/outcomeTable.js",
+        "src/verifyOutcome.js",
+        "test/verifyOutcome.test.js"
+      ],
+      "tests_added": [
+        "test/verifyOutcome.test.js"
+      ],
+      "notes": "Walking skeleton, reusing STORY-005/006's patterns and logger.js/notifier.js unchanged. outcomeTable.js mirrors approvalTable.js: in-memory insert/getAll/reset, rejecting a row missing orderId/issueType/recommendedAction/rationale/riskLevel/riskRationale/a valid outcomeStatus (success|failed)/verificationDetails/a valid timestamp. verifyOutcome() takes an approved action record (from requireApproval.js/assessRisk.js) and calls an injectable options.checkOutcome(record) -- defaulting to a stub returning 'success', since no real outcome-checking integration exists yet, the same injectable-callback pattern orderEventListener.js uses for options.process. A checkOutcome result other than 'success'/'failed' (or a thrown error) is never treated as success: it is logged as outcome_verification_failed, alerted, and re-thrown ('verification process failure'). The result is stored via outcomeTable (injectable via options.outcomeTable) before anything else; a storage failure is logged as outcome_logging_failed, alerted, and re-thrown, so an outcome is never silently lost ('incorrect outcome logging'). Only when the stored outcomeStatus is 'failed' is an alert notification sent via notifier.js's sendNotification() (injectable via options.notify); if that notification itself throws, it is logged as alert_failed, alerted, and re-thrown, with a dedicated test confirming the outcome row is already durably stored by that point ('alert failure'). Every outcome -- success or failed -- is logged as outcome_verified with full verification details (REQ-009, trust criterion). Decision confirmed with the requester before building: verified outcomes get their own table rather than extending the STORY-005 risk-assessment row, consistent with how requireApproval.js was built on approvalTable.js rather than mutating riskAssessmentTable.js. 89/89 tests pass via `npm test` (7 new). assessRisk.js, requireApproval.js, riskAssessmentTable.js, approvalTable.js, logger.js, and notifier.js were not modified.",
+      "updated_at": "2026-09-12T00:00:00Z",
       "verification": {
         "state": "not_started",
         "criteria_passed": 0,
