@@ -71,6 +71,23 @@ test('happy path: prepared actions produce a summary that is returned and logged
   assert.equal(entries[0].actions[1].orderId, 'ORD-71');
 });
 
+test('happy path: no prepared actions produces an empty summary rather than a failure', () => {
+  riskAssessmentTable.reset();
+  const logPath = tempLogPath('audit-');
+
+  const summary = generateActionSummary({ logPath });
+
+  assert.equal(summary.actionCount, 0);
+  assert.deepEqual(summary.actions, []);
+  assert.ok(summary.generatedAt, 'summary must carry a generation timestamp even when empty');
+
+  const entries = readLogEntries(logPath);
+  assert.equal(entries.length, 1);
+  assert.equal(entries[0].type, 'summary_generated');
+  assert.equal(entries[0].actionCount, 0);
+  assert.deepEqual(entries[0].actions, []);
+});
+
 test('failure path: summary generation failure — a structurally malformed prepared action is rejected, logged, alerted, notified, and not returned', () => {
   const logPath = tempLogPath('audit-');
   const alertPath = tempLogPath('alerts-');
