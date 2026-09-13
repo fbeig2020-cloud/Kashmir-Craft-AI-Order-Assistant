@@ -18,8 +18,9 @@ fix the requirement — you are the architect here, not a typist.
 
 ## How we build
 
-- **Walking skeleton first.** Get the thinnest end-to-end path working, including the
-  audit trail and whatever correctness guarantee this system promises, before stacking features.
+- **Walking skeleton first.** Get the thinnest end-to-end path working before stacking
+  features. That skeleton must already log every action per REQ-015 (audit trail) and
+  already be idempotent per the rule below — don't defer either to "later."
 - **Small, reversible steps.** A change you cannot undo in one command is too big.
 - **Every external call gets an explicit timeout and capped retries.** No unbounded waits.
 - **Every side effect is idempotent.** Running it twice must not double-charge, double-email,
