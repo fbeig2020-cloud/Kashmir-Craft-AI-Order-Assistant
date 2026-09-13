@@ -353,21 +353,29 @@
       "criteria": [
         {
           "text": "Given an uncertain issue, when processing is paused, then a notification is sent to the agent.",
-          "passed": false
+          "passed": true
         },
         {
           "text": "Given an uncertain issue, when pausing fails, then an alert is generated.",
-          "passed": false
+          "passed": true
         },
         {
           "text": "Trust: All pauses are logged with issue details.",
-          "passed": false
+          "passed": true
         }
       ],
-      "files_touched": [],
-      "tests_added": [],
-      "notes": null,
-      "updated_at": null,
+      "files_touched": [
+        "src/pausedIssueTable.js",
+        "src/pauseProcessing.js",
+        "test/pausedIssueTable.test.js",
+        "test/pauseProcessing.test.js"
+      ],
+      "tests_added": [
+        "test/pausedIssueTable.test.js",
+        "test/pauseProcessing.test.js"
+      ],
+      "notes": "Walking skeleton, reusing STORY-006/007's patterns and logger.js/notifier.js unchanged. pausedIssueTable.js mirrors approvalTable.js: in-memory insert/getAll/reset, rejecting a row missing orderId/issueType/uncertaintyReason/status/a valid timestamp; a stored row's status is always 'paused_uncertain' and this story does not add a way to resume it, the same boundary approvalTable.js draws for 'paused_pending_approval'. pauseProcessing() takes a record the caller has already determined to be uncertain -- this story does not decide what 'uncertain' means, the same boundary requireApproval.js draws around 'high risk' (that determination is out of scope, left for a future story/caller). It validates the record, stores it via pausedIssueTable (injectable via options.pausedIssueTable) with status 'paused_uncertain', notifies the agent via notifier.js's sendNotification() (injectable via options.notify), then logs issue_paused with full issue details (REQ-010, trust criterion). Malformed input is rejected before any storage, logged as pause_failed, alerted, and re-thrown -- not swallowed ('pause functionality failure'). A storage failure while pausing is likewise logged as pause_failed, alerted, and re-thrown. A notification failure is logged as notification_failed, alerted, and re-thrown, with a dedicated test confirming the issue already stored as paused beforehand stays 'paused_uncertain' afterward -- a failed notification never un-pauses it ('notification failure'). Logging failure itself is handled by logger.js, which already raises its own alert on a write failure, the same way every other module in this pipeline relies on it. 103/103 tests pass via `npm test` (14 new). requireApproval.js, approvalTable.js, verifyOutcome.js, outcomeTable.js, logger.js, and notifier.js were not modified.",
+      "updated_at": "2026-09-12T00:00:00Z",
       "verification": {
         "state": "not_started",
         "criteria_passed": 0,
