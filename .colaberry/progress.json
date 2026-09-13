@@ -395,21 +395,26 @@
       "criteria": [
         {
           "text": "Given actions are prepared, when a summary is generated, then it is displayed to the agent.",
-          "passed": false
+          "passed": true
         },
         {
           "text": "Given actions are prepared, when summary generation fails, then an alert is generated.",
-          "passed": false
+          "passed": true
         },
         {
           "text": "Trust: All summaries are logged with action details.",
-          "passed": false
+          "passed": true
         }
       ],
-      "files_touched": [],
-      "tests_added": [],
-      "notes": null,
-      "updated_at": null,
+      "files_touched": [
+        "src/actionSummary.js",
+        "test/actionSummary.test.js"
+      ],
+      "tests_added": [
+        "test/actionSummary.test.js"
+      ],
+      "notes": "Walking skeleton, reusing STORY-007/008's patterns and logger.js/notifier.js unchanged. No new table: a summary is a derived, point-in-time view over riskAssessmentTable.js (STORY-005's recommended-plus-risk-assessed actions, the fullest 'ready for review' state before either auto-approval or the approval gate), not a new stored entity, so generateActionSummary() (actionSummary.js) persists nothing new -- only the event of generating it is logged. It reads options.riskAssessmentTable (default: the real table), validates every row (orderId/issueType/recommendedAction/rationale/riskLevel present and correctly typed), and separately checks that each row's riskLevel is one of low/medium/high. A structurally malformed row is a 'summary generation failure' (logged/alerted as summary_generation_failed); a structurally complete row with an unrecognized riskLevel is treated as a distinct 'incorrect summary' case (logged/alerted as summary_incorrect) rather than folded into the same check or silently included, since it would render a misleading line to the agent, not a missing one -- the two failure types also throw with distinct prefixes ('Summary generation failed: ...' vs 'Summary incorrect: ...') so tests and callers can tell them apart. Either failure sends a notification to the agent via notifier.js's sendNotification() (injectable via options.notify); if that notification itself throws, it is logged and alerted separately as alert_failed and re-thrown, with a dedicated test confirming both the original failure and the alert failure appear in the audit/alert logs in order, distinct events. On success, the built summary ({generatedAt, actionCount, actions[]}, each action carrying a human-readable summaryLine) is logged as summary_generated with full action details (trust criterion) and returned -- the return value stands in for 'displayed to the agent' since no UI layer exists yet anywhere in this codebase, the same stand-in prior stories use for their return value/log entry. An earlier draft's 'incorrect summary' check (comparing the built summary's actionCount to the source row count) was caught as dead code before being tested -- actions is built via rows.map(), so the two lengths can never diverge -- and was replaced with the riskLevel check above before any test was written against it. 107/107 tests pass via `npm test` (4 new). assessRisk.js, riskAssessmentTable.js, requireApproval.js, approvalTable.js, verifyOutcome.js, outcomeTable.js, pauseProcessing.js, pausedIssueTable.js, logger.js, and notifier.js were not modified.",
+      "updated_at": "2026-09-13T00:00:00Z",
       "verification": {
         "state": "not_started",
         "criteria_passed": 0,
