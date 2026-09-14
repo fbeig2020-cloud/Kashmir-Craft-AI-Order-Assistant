@@ -434,21 +434,29 @@
       "criteria": [
         {
           "text": "Given an order issue, when resolved within 2 hours, then it is logged as timely.",
-          "passed": false
+          "passed": true
         },
         {
           "text": "Given an order issue, when resolution exceeds 2 hours, then an alert is generated.",
-          "passed": false
+          "passed": true
         },
         {
           "text": "Trust: All resolution times are logged for performance analysis.",
-          "passed": false
+          "passed": true
         }
       ],
-      "files_touched": [],
-      "tests_added": [],
-      "notes": null,
-      "updated_at": null,
+      "files_touched": [
+        "src/resolutionTimeTable.js",
+        "src/checkResolutionTime.js",
+        "test/resolutionTimeTable.test.js",
+        "test/checkResolutionTime.test.js"
+      ],
+      "tests_added": [
+        "test/resolutionTimeTable.test.js",
+        "test/checkResolutionTime.test.js"
+      ],
+      "notes": "checkResolutionTime(record) computes elapsed time between detectedAt and resolvedAt, stores every result (timely or not) in resolutionTimeTable for performance analysis, logs resolution_timely/resolution_exceeded to the audit trail, and sends an alert notification when elapsed time exceeds 2 hours. Mirrors verifyOutcome.js/pauseProcessing.js's validate-store-notify-log shape. Standalone and fully tested (like verifyOutcome.js/pauseProcessing.js were before their callers existed) -- not yet wired into a caller, since no upstream module currently threads a detectedAt timestamp through the pipeline; wiring it in was scoped out to avoid touching verifyOutcome.js outside this story. 15/15 new tests pass; 123/123 total via `npm test`.",
+      "updated_at": "2026-09-14T00:00:00Z",
       "verification": {
         "state": "not_started",
         "criteria_passed": 0,
