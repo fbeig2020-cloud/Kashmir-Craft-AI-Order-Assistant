@@ -5,5 +5,9 @@
   "description": "AI-powered order operations assistant for the Kashmir Craft website.",
   "scripts": {
     "test": "node --test"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.30.0",
+    "zod": "^4.6.5"
   }
 }

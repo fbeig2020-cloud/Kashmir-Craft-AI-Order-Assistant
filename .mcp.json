@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "kashmir-craft-order-assistant": {
+      "command": "node",
+      "args": ["src/mcpServer.js"]
+    }
+  }
+}
