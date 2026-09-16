@@ -602,21 +602,30 @@
       "criteria": [
         {
           "text": "Given a customer support screen, when I perform the primary action, then it completes in three clicks or fewer.",
-          "passed": false
+          "passed": true
         },
         {
           "text": "Given a customer support screen, when I attempt to perform an action that requires more than three clicks, then I receive a notification to streamline the process.",
-          "passed": false
+          "passed": true
         },
         {
           "text": "Trust: Every action performed is logged with the number of clicks for audit.",
-          "passed": false
+          "passed": true
         }
       ],
-      "files_touched": [],
-      "tests_added": [],
-      "notes": null,
-      "updated_at": null,
+      "files_touched": [
+        "src/screenDefinitions.js",
+        "src/clickLogTable.js",
+        "src/clickTracker.js",
+        "test/clickLogTable.test.js",
+        "test/clickTracker.test.js"
+      ],
+      "tests_added": [
+        "test/clickLogTable.test.js",
+        "test/clickTracker.test.js"
+      ],
+      "notes": "Walking skeleton, reusing STORY-006/008's validate-store-notify-log pattern. This codebase has no UI layer anywhere yet (STORY-009's notes say the same), so a 'customer support screen' is defined in screenDefinitions.js as a support-agent workflow that already exists in the backend -- review_action_summary (STORY-009), approve_high_risk_action (STORY-006), resolve_paused_issue (STORY-008) -- each with a fixed step sequence (1-2 steps, all within the 3-click limit today). clickLogTable.js mirrors pausedIssueTable.js: in-memory insert/getAll/reset, rejecting a row missing screenId/primaryAction/a non-negative integer clickCount/a boolean withinLimit/a valid timestamp. clickTracker.js's completeAction(screenId, clickCount) validates the screen and clickCount, stores a row via clickLogTable (injectable via options.clickLogTable) with withinLimit = clickCount <= 3, and always logs click_count_logged with the click count (REQ-013, trust criterion) -- satisfied regardless of whether the limit was met. When clickCount exceeds 3, it additionally sends a notification via notifier.js's sendNotification() (injectable via options.notify) and logs excessive_clicks_detected before the final click_count_logged entry. An unknown screenId or malformed clickCount is rejected before storage, logged as click_tracking_failed, alerted, and re-thrown -- not swallowed ('primary action takes more than three clicks' starts from valid input only; bad input is its own failure). A storage failure is likewise logged/alerted/re-thrown as click_tracking_failed ('click count logging fails'). A notification failure on an excessive-click attempt is logged/alerted/re-thrown as notification_failed, with a dedicated test confirming the click count is already durably stored beforehand ('notification for excessive clicks does not appear'). 18/18 new tests pass; 141/141 total via `npm test`. logger.js, notifier.js, pausedIssueTable.js, and approvalTable.js were not modified. Flagged to the requester before building: REQ-013 assumes screens that don't exist in this codebase; agreed to model screens as backend workflows rather than building a new UI or leaving the story unbuilt.",
+      "updated_at": "2026-09-16T00:00:00Z",
       "verification": {
         "state": "not_started",
         "criteria_passed": 0,
